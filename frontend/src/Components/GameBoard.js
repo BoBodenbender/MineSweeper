@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { PopulateBoard } from './PopulateBoard'
 import { AppContext } from "./AppContext";
+import { GameOver } from "./GameOver";
 
 
 export const GameBoard = () => {
     const { grid, setGrid } = useContext(AppContext);
     const temp = grid.slice();
-    
+
 
     return (
         <div class="container text-center bg-light border-dark">
@@ -19,8 +20,8 @@ export const GameBoard = () => {
                                     onClick={() => {
                                         (obj.visible = true)
                                         setGrid(temp);
-                                    }} onContextMenu={() => { (obj.flagged = true) (console.log(obj.flagged));return false}}>
-                                    {(obj.visible ? (obj.flagged ? <h1>F</h1> : <h1>{obj.value}</h1>) : <h1></h1>)}
+                                    }} onContextMenu={() => { (obj.flagged = true)(console.log(obj.flagged)); return false }}>
+                                    {(obj.visible ? (obj.value === 'X' ? <GameOver/> : <h1>{obj.value}</h1>) : <h1></h1>)}
                                 </button>
                             )
                         })}
@@ -29,4 +30,5 @@ export const GameBoard = () => {
             })}
         </div>
     )
+
 }
